@@ -598,8 +598,8 @@ void USpudSubsystem::LoadComplete(const FString& SlotName, bool bSuccess)
 {
 	CurrentState = ESpudSystemState::RunningIdle;
 	IsRestoringState = false;
-	SlotNameInProgress = "";
 	PostLoadGame.Broadcast(SlotName, bSuccess);
+	SlotNameInProgress = "";
 	
 	WorldToLoad = nullptr;
 }
@@ -1094,7 +1094,12 @@ USpudSaveGameInfo* USpudSubsystem::GetAutoSaveGame()
 
 FString USpudSubsystem::GetSaveGameDirectory()
 {
-	return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectSavedDir());
+#if UE_EDITOR
+	return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectSavedDir());//项目文件所在目录，Saved\SaveGames
+#else
+	//return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectDir());//exe目录同一层级，项目名字子目录下面，Saved\SaveGames
+	return FString::Printf(TEXT("%sSaveGames/"), *FPlatformProcess::BaseDir());//exe目录Saved\SaveGames
+#endif
 }
 
 FString USpudSubsystem::GetSaveGameFilePath(const FString& SlotName)
@@ -1111,7 +1116,12 @@ void USpudSubsystem::ListSaveGameFiles(TArray<FString>& OutSaveFileList)
 
 FString USpudSubsystem::GetActiveGameFolder()
 {
+#if UE_EDITOR
 	return FString::Printf(TEXT("%sCurrentGame/"), *FPaths::ProjectSavedDir());
+#else
+	//return FString::Printf(TEXT("%sCurrentGame/"), *FPaths::ProjectDir());//exe目录同一层级，项目名字子目录下面
+	return FString::Printf(TEXT("%sCurrentGame/"), *FPlatformProcess::BaseDir());//exe目录
+#endif
 }
 
 FString USpudSubsystem::GetActiveGameFilePath(const FString& Name)
