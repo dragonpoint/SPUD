@@ -1095,9 +1095,9 @@ USpudSaveGameInfo* USpudSubsystem::GetAutoSaveGame()
 FString USpudSubsystem::GetSaveGameDirectory()
 {
 #if UE_EDITOR
-	return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectSavedDir());
+	return FString::Printf(TEXT("%sSaveData/"), *FPaths::ProjectSavedDir());
 #else
-	return FString::Printf(TEXT("%s../Saved/SaveGames/"), *FPaths::ProjectDir());
+	return FString::Printf(TEXT("%s../Saved/SaveData/"), *FPaths::ProjectDir());
 #endif
 }
 
@@ -1116,15 +1116,15 @@ void USpudSubsystem::ListSaveGameFiles(TArray<FString>& OutSaveFileList)
 FString USpudSubsystem::GetActiveGameFolder()
 {
 #if UE_EDITOR
-	return FString::Printf(TEXT("%sCurrentGame/"), *FPaths::ProjectSavedDir());
+	return FString::Printf(TEXT("%sCurrentData/"), *FPaths::ProjectSavedDir());
 #else
-	return FString::Printf(TEXT("%s../Saved/CurrentGame/"), *FPaths::ProjectDir());
+	return FString::Printf(TEXT("%s../Saved/CurrentData/"), *FPaths::ProjectDir());
 #endif
 }
 
 FString USpudSubsystem::GetActiveGameFilePath(const FString& Name)
 {
-	return FString::Printf(TEXT("%sSaveGames/%s.sav"), *GetActiveGameFolder(), *Name);
+	return FString::Printf(TEXT("%sSaveData/%s.sav"), *GetActiveGameFolder(), *Name);
 }
 
 
