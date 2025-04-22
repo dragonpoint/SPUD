@@ -1095,10 +1095,9 @@ USpudSaveGameInfo* USpudSubsystem::GetAutoSaveGame()
 FString USpudSubsystem::GetSaveGameDirectory()
 {
 #if UE_EDITOR
-	return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectSavedDir());//项目文件所在目录，Saved\SaveGames
+	return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectSavedDir());
 #else
-	//return FString::Printf(TEXT("%sSaveGames/"), *FPaths::ProjectDir());//exe目录同一层级，项目名字子目录下面，Saved\SaveGames
-	return FString::Printf(TEXT("%sSaveGames/"), *FPlatformProcess::BaseDir());//exe目录Saved\SaveGames
+	return FString::Printf(TEXT("%s../Saved/SaveGames/"), *FPaths::ProjectDir());
 #endif
 }
 
@@ -1119,8 +1118,7 @@ FString USpudSubsystem::GetActiveGameFolder()
 #if UE_EDITOR
 	return FString::Printf(TEXT("%sCurrentGame/"), *FPaths::ProjectSavedDir());
 #else
-	//return FString::Printf(TEXT("%sCurrentGame/"), *FPaths::ProjectDir());//exe目录同一层级，项目名字子目录下面
-	return FString::Printf(TEXT("%sCurrentGame/"), *FPlatformProcess::BaseDir());//exe目录
+	return FString::Printf(TEXT("%s../Saved/CurrentGame/"), *FPaths::ProjectDir());
 #endif
 }
 
