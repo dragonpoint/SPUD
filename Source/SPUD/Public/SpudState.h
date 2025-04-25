@@ -192,14 +192,15 @@ protected:
 	};
 
 
+	bool ShouldStoreLevel(ULevel* Level) const;
+
+public:
 	/// Get the folder which will contain the level-specific game data for the active game while it's running
 	/// This is so that not all level data needs to be in memory at once.
-	FString GetActiveGameLevelFolder();
+	static FString GetActiveGameLevelFolder();
 
 	/// Purge the active game's level data on disk, ready for a new game or loaded game.	
-	void RemoveAllActiveGameLevelFiles();
-
-	bool ShouldStoreLevel(ULevel* Level) const;
+	static void RemoveAllActiveGameLevelFiles();
 
 public:
 
