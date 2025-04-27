@@ -914,4 +914,4 @@ struct SPUD_API FSpudSaveData : public FSpudChunk
  * @param Length Total length of data to copy
  * @return The length of the data actually copied
  */
-int64 SpudCopyArchiveData(FArchive& InArchive, FArchive& OutArchive, int64 Length);
+SPUD_API int64 SpudCopyArchiveData(FArchive& InArchive, FArchive& OutArchive, int64 Length);
